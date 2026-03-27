@@ -14,7 +14,7 @@ public class EjemploStreamFilterSingle2 {
                 .map(nombre -> new User(nombre.split(" ")[0], nombre.split(" ")[1]))
                 .peek(System.out::println)
                 .filter(u -> u.getId().equals(3))
-                .findFirst().get();
+                .findFirst().orElseGet(() -> new User("Jhon" ,"Doe"));
 
 
         System.out.println(user);

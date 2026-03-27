@@ -1,5 +1,9 @@
 package ejemplos.models;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class User {
 
     private String nombre;
@@ -9,6 +13,21 @@ public class User {
     private Integer id;
 
     private static int ultimoId;
+
+    private List<Tax> taxes = new ArrayList<>();
+
+    public User() {
+
+    }
+
+    public List<Tax> getTaxes() {
+        return taxes;
+    }
+
+    public void addTaxe(Tax taxes) {
+        this.taxes.add(taxes);
+        taxes.setUser(this);
+    }
 
     public Integer getId() {
         return id;
@@ -43,5 +62,18 @@ public class User {
         this.nombre = nombre;
         this.apellido = apellido;
         this.id = ++ultimoId;
+        this.taxes = new ArrayList<>();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(nombre, user.nombre) && Objects.equals(apellido, user.apellido);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, apellido);
     }
 }
